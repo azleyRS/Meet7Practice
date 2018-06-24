@@ -7,10 +7,10 @@
 
     <TextView
         android:id="@+id/cell_2_textview"
-        android:text="fragment2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="parent"
+        android:text="fragment2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

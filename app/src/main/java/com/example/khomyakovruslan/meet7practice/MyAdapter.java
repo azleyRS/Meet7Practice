@@ -7,42 +7,77 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private String[] test = {"test1","test2","test3"};
+import java.util.ArrayList;
 
-    public MyAdapter() {
+class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    ArrayList<ItemTypes> mDate;
+
+    public MyAdapter(ArrayList<ItemTypes> date) {
+        mDate = date;
     }
 
-    //this method need for testing
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        if (mDate.get(position).getType()==ItemTypes.ITEM1.type){
+            return ItemTypes.ITEM1.type;
+        } else if (mDate.get(position).getType()==ItemTypes.ITEM2.type){
+            return ItemTypes.ITEM2.type;
+        } else if (mDate.get(position).getType()==ItemTypes.ITEM3.type){
+            return ItemTypes.ITEM3.type;
+        }
+        return mDate.get(position).getType();
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_1,parent,false);
-        return new ViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        switch (viewType){
+            case 1: return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_1,parent,false));
+            case 2: return new ViewHolder2(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_2,parent,false));
+            case 3: return new ViewHolder3(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_3,parent,false));
+        }
+        return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_1,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String text = test[position];
-        holder.mTextView.setText(text);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()){
+            case 1: ViewHolder1 viewHolder1 = (ViewHolder1)holder;
+            viewHolder1.mTextView.setText("Test1");
+            break;
+            case 2: ViewHolder2 viewHolder2 = (ViewHolder2)holder;
+            viewHolder2.mTextView.setText("Test2");
+            break;
+            case 3: ViewHolder3 viewHolder3 = (ViewHolder3)holder;
+            viewHolder3.mTextView.setText("Test3");
+            break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return test.length;
+        return mDate.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView mTextView;
-
-        public ViewHolder(View itemView) {
+    private class ViewHolder1 extends RecyclerView.ViewHolder {
+        TextView mTextView;
+        public ViewHolder1(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.cell_1_textview);
+            mTextView = itemView.findViewById(R.id.cell_1_textview);
+        }
+    }
+    private class ViewHolder2 extends RecyclerView.ViewHolder {
+        TextView mTextView;
+        public ViewHolder2(View itemView) {
+            super(itemView);
+            mTextView = itemView.findViewById(R.id.cell_2_textview);
+        }
+    }
+    private class ViewHolder3 extends RecyclerView.ViewHolder {
+        TextView mTextView;
+        public ViewHolder3(View itemView) {
+            super(itemView);
+            mTextView = itemView.findViewById(R.id.cell_3_textview);
         }
     }
 }
