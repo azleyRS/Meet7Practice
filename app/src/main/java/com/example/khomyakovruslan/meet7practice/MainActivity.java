@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add(ItemTypes.ITEM1);
         mData.add(ItemTypes.ITEM2);
         mData.add(ItemTypes.ITEM3);
+        mData.add(ItemTypes.ITEM4);
 
         mAdapter = new MyAdapter(mData);
         mRecyclerView.setAdapter(mAdapter);

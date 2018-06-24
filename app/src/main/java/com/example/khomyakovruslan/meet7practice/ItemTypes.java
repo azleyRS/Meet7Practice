@@ -3,7 +3,8 @@ package com.example.khomyakovruslan.meet7practice;
 public enum ItemTypes {
     ITEM1(1),
     ITEM2(2),
-    ITEM3(3);
+    ITEM3(3),
+    ITEM4(4);
 
     int type;
 
